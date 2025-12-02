@@ -14,13 +14,16 @@ namespace topit {
     virtual ~IDraw() = default;
    };
   struct Dot: IDraw {
+    explicit Dot (p_t dd);
     p_t begin() const override;
     p_t next(p_t prev) const override;
     p_t d;
   };
 }
 int main() {
-  using namespace topit; 
+  using namespace topit;
+  IDraw* shp[3] = {};
+  shp[0] = new Dot  
   p_t a{1, 1}, b{0, 1};
   std::cout << (a == b) << "\n";
 }
@@ -39,4 +42,8 @@ bool topit:: operator == (p_t a, p_t  b) {
 bool topit::operator!= (p_t a, p_t b) {
   return !(a == b);
 }
+
+topit::Dot::Dot(p_t dd):
+ d{dd}
+{}
 
