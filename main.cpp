@@ -1,5 +1,5 @@
 #include <iostream>
-#include < >
+#include <stdexpect>
 namespace topit {
   struct p_t {
     int x, y;
@@ -7,6 +7,7 @@ namespace topit {
   struct f_t {
     p_t aa, bb;
   };
+  size_t rows
   bool operator == (p_t a, p_t  b);
   bool operator!= (p_t a, p_t b);
   struct IDraw {
@@ -55,6 +56,12 @@ int main() {
   delete shp[0];
   return err;
 }
+char * topit::canvas(f_t fr, char fill){
+  size_t s = rows(fr) * cols(fr);
+  char * c = new char[s];
+  for (size_t i = 0; i<s; ++i) {
+    c[i] = fill;
+  }
 topit::p_t topit::Dot::begin() const {
   return d;
 }
@@ -63,6 +70,12 @@ topit:: p_t topit::Dot::next(p_t prev) const {
     throw std::logic_error("bad prev");
   }
   return d;
+}
+size_t topit::rows(f_t fr) {
+  return (fr.bb.y - fr.bb.x + 1);
+}
+size_t topit::cols(f_t fr) {
+  return (fr.bb.x - fr.aa.x+1);
 }
 bool topit:: operator == (p_t a, p_t  b) {
   return a.x == b.x && a.y == b.y;
